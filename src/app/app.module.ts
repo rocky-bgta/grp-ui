@@ -1,29 +1,43 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import {AppComponent} from './app.component';
-// Routing Module
-import {AppRoutingModule} from './app.routing';
-import {FullLayoutComponent} from './layout/full-layout.component';
-import {Ng2AutoBreadCrumb} from "ng2-auto-breadcrumb";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './shared';
 
+// AoT requires an exported function for factories
+export const createTranslateLoader = (http: HttpClient) => {
+    /* for development
+    return new TranslateHttpLoader(
+        http,
+        '/start-angular/SB-Admin-BS4-Angular-6/master/dist/assets/i18n/',
+        '.json'
+    ); */
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    Ng2AutoBreadCrumb
-  ],
-  declarations: [
-    FullLayoutComponent,
-    AppComponent
-  ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+    imports: [
+        CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        AppRoutingModule
+    ],
+    declarations: [AppComponent],
+    providers: [AuthGuard],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

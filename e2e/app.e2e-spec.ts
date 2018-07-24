@@ -1,14 +1,14 @@
-import { AdminPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('admin App', () => {
-  let page: AdminPage;
+describe('test-ng4 App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new AdminPage();
+    page = new AppPage();
   });
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('SB Admin BS4 Angular5');
   });
 });
