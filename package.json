@@ -29,9 +29,11 @@
         "chart.js": "^2.7.2",
         "core-js": "^2.5.5",
         "font-awesome": "^4.7.0",
+        "jwt-decode": "^2.2.0",
         "ng2-charts": "^1.6.0",
+        "ngx-cookie-service": "^1.0.10",
         "rxjs": "^6.1.0",
-        "yarn": "^1.6.0",
+        "yarn": "^1.9.1",
         "zone.js": "^0.8.26"
     },
     "devDependencies": {
