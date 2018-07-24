@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
                 private loginService: LoginService,
                 private cookieService: CookieService) {}
 
-    private login: Login;
-    private loginDetail: LoginDetail;
+    public login: Login = new Login();
+    private loginDetail: LoginDetail = new LoginDetail();
 
 
     ngOnInit() {}
