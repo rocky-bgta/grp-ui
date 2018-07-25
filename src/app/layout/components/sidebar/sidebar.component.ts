@@ -3,28 +3,29 @@ import {Router, NavigationEnd} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {Service} from "./service/service";
 import {CookieService} from "ngx-cookie-service";
+import {Menu} from "./models/menu";
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent implements OnInit {
 
     //=============================
-    nodes = null;
+    //nodes:any;
+
+    public menuList: Menu[] = new Array<Menu>();
+
     //=============================
 
     ngOnInit(): void {
         this.service.getMenus()
             .subscribe(data => {
-                this.nodes = data;
-                console.log("Menu: "+ JSON.stringify(this.nodes,null,2));
+                this.menuList = data;
+                console.log("Menu: " + JSON.stringify(this.menuList, null, 2));
             });
     }
-
-
-
 
 
     isActive: boolean = false;

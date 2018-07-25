@@ -1,11 +1,24 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
+
+        <!--
         <a
             routerLink="/dashboard"
             [routerLinkActive]="['router-link-active']"
             class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Dashboard' | translate }}</span>
+        </a>
+        -->
+
+
+
+        <a *ngFor="let menu of menuList"
+            routerLink="/{{menu.menuPath}}"
+            [routerLinkActive]="['router-link-active']"
+            class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ menu.menuTitle | translate }}</span>
         </a>
 
 
