@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
 
         console.log("on submit is called");
         //this.login = new Login(this.name, this.password);
+        console.log("Login info: "+ JSON.stringify(this.login));
         this.loginService.getAccessDetails(this.login)
             .subscribe(data => {
                 this.loginDetail = data;
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
                 this.cookieService.set('token_type', data.token_type);
                 if (this.loginService.isLogin()) {
                     //this.submitted = true;
+                    console.log("login work"+JSON.stringify(data,null,2));
                     this.loginService.getUserDetails(data.access_token);
                     this.router.navigate(['/dashboard']);
                 }

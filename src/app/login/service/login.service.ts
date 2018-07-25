@@ -30,10 +30,11 @@ export class LoginService {
     private user_search_service = "/service/user-search/";
 
   private tokenUrl = 'http://'+this.HOST_IP+':'+this.PORT+this.security_service+'/oauth/token';
-  private testUrl = 'http://localhost:9991/login';
-  private userDetailsUrl = 'http://172.16.201.123:7051/api/user/';
+  private userDetailsUrl = 'http://'+this.HOST_IP+':'+this.PORT+this.security_service +'/api/user/';
+
   private accessToken = null;
   private isPasswordChange: boolean;
+
 
   constructor(private http: HttpClient,
               private cookieService: CookieService,
@@ -114,8 +115,8 @@ export class LoginService {
     return false;
   }
 
-  test (login: Login): Observable<LoginDetail>  {
+ /* test (login: Login): Observable<LoginDetail>  {
     return this.http.get<LoginDetail>(this.testUrl);
-  }
+  }*/
 
 }
