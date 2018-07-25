@@ -16,11 +16,6 @@ import {LoginDetail} from "./models/login-detail";
 })
 export class LoginComponent implements OnInit {
 
-    /*constructor(private fb:FormBuilder,
-                private router:Router,
-                private loginService:LoginService,
-                private cookieService: CookieService )*/
-
     constructor(private router: Router,
                 private loginService: LoginService,
                 private cookieService: CookieService) {}
@@ -33,6 +28,7 @@ export class LoginComponent implements OnInit {
 
     onLoggedin() {
         localStorage.setItem('isLoggedin', 'true');
+
 
         console.log("on submit is called");
         //this.login = new Login(this.name, this.password);
@@ -51,6 +47,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/dashboard']);
                 }
             });
+
 
     }
 }

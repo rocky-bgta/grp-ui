@@ -21,9 +21,15 @@ const httpOptions = {
 
 @Injectable()
 export class LoginService {
+    private HOST_IP = "172.16.26.130";
+    private PORT = "8888";
+    private security_service = "/service/auth/";
+    private pds_service = "/service/pds/";
+    private pds_search_service = "/service/pds-search/";
+    private organogram_service = "/service/org/";
+    private user_search_service = "/service/user-search/";
 
-
-  private tokenUrl = 'http://172.16.201.123:7051/oauth/token';
+  private tokenUrl = 'http://'+this.HOST_IP+':'+this.PORT+this.security_service+'/oauth/token';
   private testUrl = 'http://localhost:9991/login';
   private userDetailsUrl = 'http://172.16.201.123:7051/api/user/';
   private accessToken = null;
