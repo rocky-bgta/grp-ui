@@ -1,21 +1,42 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, Output, EventEmitter, OnInit} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Service} from "./service/service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
+
+    //=============================
+    nodes = null;
+    //=============================
+
+    ngOnInit(): void {
+        this.service.getMenus()
+            .subscribe(data => {
+                this.nodes = data;
+                console.log("Menu: "+ JSON.stringify(this.nodes,null,2));
+            });
+    }
+
+
+
+
+
     isActive: boolean = false;
     collapsed: boolean = false;
     showMenu: string = '';
     pushRightClass: string = 'push-right';
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
-    
-    constructor(private translate: TranslateService, public router: Router) {
+
+    constructor(private translate: TranslateService,
+                public router: Router,
+                public service: Service) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
