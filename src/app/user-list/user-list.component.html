@@ -1,0 +1,90 @@
+<div class="example-container col-md-12 mat-elevation-z8">
+    <div class="row">
+        <div class="login-search col-md-5">
+            <mat-form-field>
+                <input [(ngModel)]="loginName" matInput placeholder="Please Type Login Name here">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedDepartment" class="department" placeholder="Select Department">
+                    <mat-option *ngFor="let department of departments" [value]="department.deptCode">{{department.deptName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="username-search col-md-5">
+            <mat-form-field>
+                <input [(ngModel)]="userName" class="userName" matInput placeholder="Please Type User Name here">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedDesignation" (ngModelChange)="toNumber()" class="designation" placeholder="Select Designation">
+                    <mat-option *ngFor="let designation of designations" [value]="designation.desigCode">{{designation.desigName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="add-and-search col-md-2">
+            <a routerLink="./add" routerLinkActive="active">
+                <i class="material-icons">person_add</i>
+            </a>
+            <button (click)="search()" mat-button>
+                <i class="material-icons">search</i>
+            </button>
+
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+
+        Position Column
+        <ng-container matColumnDef="imagePath">
+            <mat-header-cell *matHeaderCellDef> Image. </mat-header-cell>
+            <mat-cell *matCellDef="let userInfos"> "dummy" </mat-cell>
+        </ng-container>
+
+        Name Column
+        <ng-container matColumnDef="loginName">
+            <mat-header-cell *matHeaderCellDef> Login Name </mat-header-cell>
+            <mat-cell *matCellDef="let userInfos"> {{userInfos.loginName}} </mat-cell>
+        </ng-container>
+
+        Weight Column
+        <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+            <mat-cell *matCellDef="let userInfos"> {{userInfos.employeeFullName}} </mat-cell>
+        </ng-container>
+
+        Symbol Column
+        <ng-container matColumnDef="designation">
+            <mat-header-cell *matHeaderCellDef> Designation </mat-header-cell>
+            <mat-cell *matCellDef="let userInfos"> {{userInfos.designationName}} </mat-cell>
+        </ng-container>
+
+        Symbol Column
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let userInfos"> {{userInfos.active}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <a routerLink="./edit-user" routerLinkActive="active">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a routerLink="./user-details" routerLinkActive="active">
+                    <i class="material-icons">more_horiz</i>
+                </a>
+                <i class="material-icons">remove</i>
+                <a routerLink="./change-password" routerLinkActive="active">
+                    <i class="material-icons">lock</i>
+                </a>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onEdit(row.username)"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="2" [pageSizeOptions]="[2, 5, 10]" [showFirstLastButtons]="true">
+    </mat-paginator>
+
+
+</div>
